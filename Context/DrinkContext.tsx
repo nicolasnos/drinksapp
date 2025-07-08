@@ -12,12 +12,14 @@ const DrinkContext = createContext();
 const DrinkProvider = ({ children }: any) => {
   const client = new Client();
   const [drink, setDrink] = useState<String | null>(null);
+  const [loading, setLoading] = useState(true);
 
   const initialReq = async () => {
     const initialDrink = await client.initialReq(
       "https://www.thecocktaildb.com/api/json/v1/1/random.php"
     );
     setDrink(initialDrink);
+    setLoading(false);
   };
 
   const addDrink = (newDrink: any) => {
@@ -33,7 +35,7 @@ const DrinkProvider = ({ children }: any) => {
   }, []);
 
   return (
-    <DrinkContext.Provider value={{ drink, addDrink, removeDrink }}>
+    <DrinkContext.Provider value={{ drink, addDrink, removeDrink, loading }}>
       {children}
     </DrinkContext.Provider>
   );
