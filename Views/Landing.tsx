@@ -1,42 +1,52 @@
-import React, { useContext, useEffect, Suspense } from "react";
+import * as React from "react";
+import { useContext } from "react";
 import { StatusBar } from "expo-status-bar";
 import { Text, View, Image, StyleSheet } from "react-native";
 import { DrinkContext } from "../Context/DrinkContext";
 import { Ingredients } from "../Components/Ingredients";
 import { Measures } from "../Components/Measures";
 import { Preparation } from "../Components/Preparation";
+import { Header } from "../Components/Header";
 
 export function Landing() {
-  const { drink } = useContext(DrinkContext);
-  let render;
-  useEffect(() => {
-    render = () => {
-      return (
-        <View
-          style={{
-            alignItems: "center",
-            backgroundColor: "#f5f5f5",
-            width: "100%",
-          }}
-        >
-          <Text style={styles.drinkTitle}>This is your daily drink</Text>
-          <Text style={styles.drinkTitle}>{drink.drinks?.[0].strDrink}</Text>
-          <Image
-            source={drink && { url: drink.drinks?.[0].strDrinkThumb }}
-            style={styles.initialImage}
-          />
-          <View style={styles.container}>
-            <Ingredients />
-            <Measures />
-          </View>
-          <Preparation />
-          <StatusBar style="auto" />
-        </View>
-      );
-    };
-  }, [drink]);
+  const { drink, loading } = useContext(DrinkContext);
 
-  return <Suspense fallback={"Hola"}>{render}</Suspense>;
+  if (loading) return;
+  <View>
+    <Text>Loading...</Text>
+    <StatusBar style="auto" />
+  </View>;
+  if (!drink)
+    return (
+      <View>
+        <Text>No drink found</Text>
+        <StatusBar style="auto" />
+      </View>
+    );
+  else
+    return (
+      <View
+        style={{
+          alignItems: "center",
+          backgroundColor: "#f5f5f5",
+          width: "100%",
+        }}
+      >
+        <Header />
+        <Text style={styles.drinkTitle}>This is your daily drink</Text>
+        <Text style={styles.drinkTitle}>{drink.drinks?.[0].strDrink}</Text>
+        <Image
+          source={drink && { url: drink.drinks?.[0].strDrinkThumb }}
+          style={styles.initialImage}
+        />
+        <View style={styles.container}>
+          <Ingredients />
+          <Measures />
+        </View>
+        <Preparation />
+        <StatusBar style="auto" />
+      </View>
+    );
 }
 
 const styles = StyleSheet.create({

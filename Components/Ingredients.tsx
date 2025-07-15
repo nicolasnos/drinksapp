@@ -8,7 +8,6 @@ export const Ingredients = () => {
 
   useEffect(() => {
     if (drink?.drinks) {
-      console.log("first");
       const current = drink.drinks[0];
       const ingredientList: string[] = [];
 
