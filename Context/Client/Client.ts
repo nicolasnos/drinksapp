@@ -18,6 +18,16 @@ class Client {
       console.error("error at search by ingredient ", error);
     }
   }
+
+  async searchByName(url: string) {
+    try {
+      const res = await fetch(url);
+      const data = await res.json();
+      return data;
+    } catch (error) {
+      console.error("error at search by name ", error);
+    }
+  }
 }
 
 export { Client };

@@ -40,10 +40,10 @@ export function Landing() {
           style={styles.initialImage}
         />
         <View style={styles.container}>
-          <Ingredients />
-          <Measures />
+          <Ingredients drink={drink} />
+          <Measures drink={drink} />
         </View>
-        <Preparation />
+        <Preparation drink={drink} />
         <StatusBar style="auto" />
       </View>
     );
