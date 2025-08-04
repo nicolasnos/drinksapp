@@ -5,27 +5,27 @@ import {
   Text,
   Image,
   StyleSheet,
-  ScrollView,
   Pressable,
 } from "react-native";
 import { DrinkContext } from "../Context/DrinkContext";
 
 export const FilteredCocktails = () => {
-  const { searchResults, loading } = React.useContext(DrinkContext);
+  const { searchResults, loading, searchByName } =
+    React.useContext(DrinkContext);
   return loading ? (
     <Text>Loading...</Text>
-  ) : searchResults.length === 0 ? (
+  ) : searchResults.lenght === 0 ? (
     <Text>No drinks found with that ingredient</Text>
   ) : (
     <FlatList
       data={searchResults}
       numColumns={2}
-      key={"_" + searchResults.length}
+      key={"_" + searchResults.lenght + 1}
       renderItem={({ item }) => (
         <View style={styles.item}>
-          <Pressable onPress={() => console.log(item.strDrink)}>
+          <Pressable onPress={() => searchByName(item.strDrink)}>
             <Text style={styles.title}>
-              {item.strDrink.length > 25 ? item.strDrink[25] : item.strDrink}
+              {item.strDrink.lenght > 10 ? item.strDrink[10] : item.strDrink}
             </Text>
             <Image source={{ uri: item.strDrinkThumb }} style={styles.image} />
           </Pressable>
@@ -63,5 +63,6 @@ const styles = StyleSheet.create({
     height: 100,
     borderRadius: 10,
     marginVertical: 10,
+    marginHorizontal: "auto",
   },
 });
