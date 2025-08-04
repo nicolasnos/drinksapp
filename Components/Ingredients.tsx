@@ -1,9 +1,7 @@
-import React, { useContext, useState, useEffect } from "react";
-import { DrinkContext } from "../Context/DrinkContext";
+import React, { useState, useEffect } from "react";
 import { Text, View, FlatList, StyleSheet } from "react-native";
 
-export const Ingredients = () => {
-  const { drink } = useContext(DrinkContext);
+export const Ingredients = ({ drink }) => {
   const [ingredients, setIngredients] = useState<String[]>([]);
 
   useEffect(() => {
@@ -18,6 +16,16 @@ export const Ingredients = () => {
       });
 
       setIngredients(ingredientList);
+    } else {
+      const current = drink[0];
+      const ingredientList: string[] = [];
+
+      Object.entries(current).forEach(([key, value]) => {
+        if (key.includes("strIngredient") && value) {
+          ingredientList.push(value as string);
+        }
+        setIngredients(ingredientList);
+      });
     }
   }, [500]);
 

@@ -1,9 +1,7 @@
-import React, { useContext, useState, useEffect } from "react";
-import { DrinkContext } from "../Context/DrinkContext";
+import React, { useState, useEffect } from "react";
 import { Text, View, FlatList, StyleSheet } from "react-native";
 
-export const Measures = () => {
-  const { drink } = useContext(DrinkContext);
+export const Measures = ({ drink }) => {
   const [measure, setMeasure] = useState<String[]>([]);
 
   useEffect(() => {
@@ -18,6 +16,16 @@ export const Measures = () => {
       });
 
       setMeasure(currentMeasure);
+    } else {
+      const current = drink[0];
+      const meassureList: string[] = [];
+
+      Object.entries(current).forEach(([key, value]) => {
+        if (key.includes("strMeasure") && value) {
+          meassureList.push(value as string);
+        }
+        setMeasure(meassureList);
+      });
     }
   }, [1500]);
 

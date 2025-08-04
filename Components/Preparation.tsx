@@ -1,10 +1,16 @@
-import React, { useContext, useState, useEffect } from "react";
-import { DrinkContext } from "../Context/DrinkContext";
+import { useEffect, useState } from "react";
 import { Text, View, FlatList, StyleSheet } from "react-native";
 
-export const Preparation = () => {
-  const { drink }: object = useContext(DrinkContext);
-  const step = drink.drinks[0].strInstructions;
+export const Preparation = ({ drink }) => {
+  const [step, setStep] = useState("");
+  useEffect(() => {
+    if (drink?.drinks) {
+      setStep(drink.drinks[0].strInstructions);
+    } else {
+      setStep(drink[0].strInstructions);
+    }
+  }, [1500]);
+
   return (
     <View style={styles.containter}>
       <Text style={styles.titleText}>Preparation</Text>
