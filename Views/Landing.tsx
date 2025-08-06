@@ -28,13 +28,14 @@ export function Landing() {
       <View
         style={{
           alignItems: "center",
-          backgroundColor: "#f5f5f5",
+          backgroundColor: "#f9f9f9",
           width: "100%",
+          height: "100%",
         }}
       >
         <Header />
-        <Text style={styles.drinkTitle}>This is your daily drink</Text>
-        <Text style={styles.drinkTitle}>{drink.drinks?.[0].strDrink}</Text>
+        <Text style={styles.drinkTitle}>Your daily drink</Text>
+        <Text style={styles.drinkName}>{drink.drinks?.[0].strDrink}</Text>
         <Image
           source={drink && { url: drink.drinks?.[0].strDrinkThumb }}
           style={styles.initialImage}
@@ -62,12 +63,22 @@ const styles = StyleSheet.create({
 
   drinkTitle: {
     fontSize: 20,
+    fontWeight: "400",
+    marginBottom: 14,
+    fontFamily: "Roboto",
+  },
+  drinkName: {
+    fontSize: 22,
     fontWeight: "bold",
     marginBottom: 10,
+    fontFamily: "Roboto",
+    textDecorationLine: "underline",
+    textDecorationColor: "#000",
   },
-
   initialImage: {
     width: 180,
     height: 200,
+    borderRadius: 10,
+    marginVertical: 10,
   },
 });

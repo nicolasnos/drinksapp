@@ -1,5 +1,13 @@
 import React, { useContext } from "react";
-import { Modal, StyleSheet, Text, Pressable, View, Image } from "react-native";
+import {
+  Modal,
+  StyleSheet,
+  Text,
+  Pressable,
+  View,
+  Image,
+  ScrollView,
+} from "react-native";
 import { DrinkContext } from "../Context/DrinkContext";
 import { Ingredients } from "./Ingredients";
 import { Preparation } from "./Preparation";
@@ -14,7 +22,7 @@ export const ModalCocktail = () => {
         <View style={styles.modalView}>
           <Modal animationType="slide" visible={true}>
             <View style={styles.overlay}>
-              <View style={styles.generalContainer}>
+              <ScrollView contentContainerStyle={styles.generalContainer}>
                 <Text
                   style={{ fontSize: 20, fontWeight: "bold", color: "#000" }}
                 >
@@ -34,9 +42,13 @@ export const ModalCocktail = () => {
                 </View>
                 <Preparation drink={modalCocktail} />
                 <Pressable onPress={() => setDisplayModal(false)}>
-                  <Text style={{ color: "blue", fontSize: 18 }}>Cheers</Text>
+                  <Text
+                    style={{ color: "red", fontSize: 22, paddingVertical: 18 }}
+                  >
+                    Cheers
+                  </Text>
                 </Pressable>
-              </View>
+              </ScrollView>
             </View>
           </Modal>
         </View>
@@ -81,6 +93,9 @@ const styles = StyleSheet.create({
   },
 
   generalContainer: {
+    flexGrow: 1,
+    marginVertical: 60,
+    height: "auto",
     width: "80%",
     backgroundColor: "#fff", // this is your modal's background
     padding: 20,

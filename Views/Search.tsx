@@ -30,7 +30,7 @@ export const Search = () => {
 
   return (
     <View>
-      <Text>
+      <Text style={{ padding: 10, fontSize: 18, fontWeight: "bold" }}>
         Here you can search a cocktail filtering by the main ingredient
       </Text>
       <TextInput
@@ -85,7 +85,7 @@ const styles = StyleSheet.create({
     borderRadius: 30,
     position: "absolute",
     right: 0,
-    top: 34,
+    top: 65,
     justifyContent: "center",
     alignItems: "center",
   },

@@ -23,7 +23,7 @@ const DrinkProvider = ({ children }: any) => {
   const searchByIngredient = async (ingredient: string) => {
     setLoading(true);
     const drinks = await client.searchByIngredient(
-      `https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${ingredient}`
+      `https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${ingredient.trim()}`
     );
     if (drinks.drinks.length > 0) {
       setSearchResults(drinks.drinks);

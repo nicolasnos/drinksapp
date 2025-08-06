@@ -32,10 +32,11 @@ export const Ingredients = ({ drink }) => {
   return (
     <View>
       <Text style={styles.titleText}>Ingredients:</Text>
-      <FlatList
-        data={ingredients}
-        renderItem={({ item }) => <Text style={styles.itemText}>{item}</Text>}
-      />
+      {ingredients.map((ingredient, index) => (
+        <Text key={index} style={styles.itemText}>
+          {ingredient}
+        </Text>
+      ))}
     </View>
   );
 };

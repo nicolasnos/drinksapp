@@ -3,6 +3,7 @@ import { DrinkContext, DrinkProvider } from "./Context/DrinkContext";
 import { createStackNavigator } from "@react-navigation/stack";
 import { Landing } from "./Views/Landing";
 import { Search } from "./Views/Search";
+import { Image, StyleSheet } from "react-native";
 
 export default function App() {
   const Stack = createStackNavigator();
@@ -11,10 +12,31 @@ export default function App() {
     <DrinkProvider>
       <NavigationContainer>
         <Stack.Navigator initialRouteName="Home">
-          <Stack.Screen name="Home" component={Landing} />
+          <Stack.Screen
+            name="Home"
+            options={{
+              headerTitle: () => (
+                <Image
+                  source={require("./assets/logo.png")}
+                  style={styles.logo}
+                />
+              ),
+              // headerShown: false,
+            }}
+            component={Landing}
+          />
           <Stack.Screen name="Search" component={Search} />
         </Stack.Navigator>
       </NavigationContainer>
     </DrinkProvider>
   );
 }
+
+const styles = StyleSheet.create({
+  logo: {
+    width: 50,
+    height: 50,
+    resizeMode: "contain",
+    borderRadius: 25,
+  },
+});
